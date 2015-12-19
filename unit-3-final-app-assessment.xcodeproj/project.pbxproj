@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B60E0E61C25E12B00301C0A /* C4QCatFactsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B60E0E51C25E12B00301C0A /* C4QCatFactsTableViewCell.xib */; };
+		3B60E0E91C25E9B200301C0A /* C4QCatFactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B60E0E81C25E9B200301C0A /* C4QCatFactsTableViewCell.m */; };
 		8D610EA01C2477EB00AADDC2 /* C4QCatFactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D610E951C2477EB00AADDC2 /* C4QCatFactsTableViewController.m */; };
 		8D610EA11C2477EB00AADDC2 /* C4QColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D610E971C2477EB00AADDC2 /* C4QColorPickerViewController.m */; };
 		8D610EA21C2477EB00AADDC2 /* C4QRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D610E991C2477EB00AADDC2 /* C4QRootViewController.m */; };
@@ -21,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B60E0E51C25E12B00301C0A /* C4QCatFactsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = C4QCatFactsTableViewCell.xib; sourceTree = "<group>"; };
+		3B60E0E71C25E9B200301C0A /* C4QCatFactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4QCatFactsTableViewCell.h; sourceTree = "<group>"; };
+		3B60E0E81C25E9B200301C0A /* C4QCatFactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = C4QCatFactsTableViewCell.m; sourceTree = "<group>"; };
 		4292FCC8B28330B5275CBFBD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4298908874A5133FD8BE086A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		8D610E941C2477EB00AADDC2 /* C4QCatFactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C4QCatFactsTableViewController.h; sourceTree = "<group>"; };
@@ -104,6 +109,9 @@
 				8D610E951C2477EB00AADDC2 /* C4QCatFactsTableViewController.m */,
 				8DA03F721C2499F400328B53 /* C4QCatFactsDetailViewController.h */,
 				8DA03F731C2499F400328B53 /* C4QCatFactsDetailViewController.m */,
+				3B60E0E51C25E12B00301C0A /* C4QCatFactsTableViewCell.xib */,
+				3B60E0E71C25E9B200301C0A /* C4QCatFactsTableViewCell.h */,
+				3B60E0E81C25E9B200301C0A /* C4QCatFactsTableViewCell.m */,
 				8D87530C1C24774700BBD328 /* Main.storyboard */,
 				8D87530F1C24774800BBD328 /* Assets.xcassets */,
 				8D8753031C24774700BBD328 /* Supporting Files */,
@@ -184,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D8753131C24774800BBD328 /* LaunchScreen.storyboard in Resources */,
+				3B60E0E61C25E12B00301C0A /* C4QCatFactsTableViewCell.xib in Resources */,
 				8D8753101C24774800BBD328 /* Assets.xcassets in Resources */,
 				8D87530E1C24774700BBD328 /* Main.storyboard in Resources */,
 			);
@@ -245,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D8753081C24774700BBD328 /* AppDelegate.m in Sources */,
+				3B60E0E91C25E9B200301C0A /* C4QCatFactsTableViewCell.m in Sources */,
 				8D610EA01C2477EB00AADDC2 /* C4QCatFactsTableViewController.m in Sources */,
 				8D8753051C24774700BBD328 /* main.m in Sources */,
 				8DA03F741C2499F400328B53 /* C4QCatFactsDetailViewController.m in Sources */,

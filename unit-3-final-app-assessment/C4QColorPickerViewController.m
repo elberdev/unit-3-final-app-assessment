@@ -26,4 +26,11 @@
     self.redButton.backgroundColor = [UIColor redColor];
 }
 
+- (IBAction)didPressButton:(UIButton *)sender {
+    
+    [self.delegate userDidPickColor:sender.backgroundColor];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 @end
