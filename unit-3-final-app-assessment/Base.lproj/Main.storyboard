@@ -132,6 +132,35 @@
             </objects>
             <point key="canvasLocation" x="1356" y="-14"/>
         </scene>
+        <!--Saved Cat Facts-->
+        <scene sceneID="9ql-Oh-0VX">
+            <objects>
+                <tableViewController title="Saved Cat Facts" id="vM6-Sh-YNq" customClass="C4QSavedCatFactsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="T8z-Hq-Vvm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" id="iRY-kW-x82">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iRY-kW-x82" id="rcb-nt-BWt">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vM6-Sh-YNq" id="yoU-0X-7ge"/>
+                            <outlet property="delegate" destination="vM6-Sh-YNq" id="5n1-2q-er6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Saved Cat Facts" id="SiZ-zr-fyV"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SaE-TI-GhD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2081" y="329"/>
+        </scene>
         <!--Cat Facts-->
         <scene sceneID="8Uu-p4-NMC">
             <objects>
@@ -145,7 +174,13 @@
                             <outlet property="delegate" destination="Q41-6z-oZL" id="DhZ-Vp-7N4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Cat Facts" id="Wcl-Wy-q65"/>
+                    <navigationItem key="navigationItem" title="Cat Facts" id="Wcl-Wy-q65">
+                        <barButtonItem key="rightBarButtonItem" title="Saved" id="i0f-Sc-bjH">
+                            <connections>
+                                <segue destination="vM6-Sh-YNq" kind="show" id="DYp-mK-b3p"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="JI8-wP-y8r" kind="show" identifier="detailSegueIdentifier" id="aLM-k9-eQs"/>
                     </connections>
@@ -166,11 +201,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vn6-i3-rKH">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vn6-i3-rKH">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKt-1u-hDV">
-                                <rect key="frame" x="32" y="289" width="536" height="21"/>
+                                <rect key="frame" x="40" y="289" width="520" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -182,19 +217,20 @@
                             <constraint firstItem="IKt-1u-hDV" firstAttribute="centerY" secondItem="Iv8-jh-IYF" secondAttribute="centerY" id="ICZ-pJ-Nup"/>
                             <constraint firstAttribute="trailing" secondItem="Vn6-i3-rKH" secondAttribute="trailing" id="JrK-tQ-d1Q"/>
                             <constraint firstItem="8cC-nd-ZrI" firstAttribute="top" secondItem="Vn6-i3-rKH" secondAttribute="bottom" id="RP6-Ve-1b3"/>
-                            <constraint firstAttribute="trailing" secondItem="IKt-1u-hDV" secondAttribute="trailing" constant="32" id="koY-Fd-WI4"/>
-                            <constraint firstItem="IKt-1u-hDV" firstAttribute="leading" secondItem="Iv8-jh-IYF" secondAttribute="leading" constant="32" id="ksb-9r-kDj"/>
+                            <constraint firstAttribute="trailing" secondItem="IKt-1u-hDV" secondAttribute="trailing" constant="40" id="koY-Fd-WI4"/>
+                            <constraint firstItem="IKt-1u-hDV" firstAttribute="leading" secondItem="Iv8-jh-IYF" secondAttribute="leading" constant="40" id="ksb-9r-kDj"/>
                             <constraint firstItem="Vn6-i3-rKH" firstAttribute="leading" secondItem="Iv8-jh-IYF" secondAttribute="leading" id="lX8-na-ILq"/>
                             <constraint firstItem="IKt-1u-hDV" firstAttribute="centerX" secondItem="Iv8-jh-IYF" secondAttribute="centerX" id="rzc-uA-wTb"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="catFactLabel" destination="IKt-1u-hDV" id="Q7e-Zk-45y"/>
+                        <outlet property="catImageView" destination="Vn6-i3-rKH" id="Vbq-B2-YUi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eba-wR-jIA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2015" y="677"/>
+            <point key="canvasLocation" x="2081" y="1048"/>
         </scene>
     </scenes>
 </document>

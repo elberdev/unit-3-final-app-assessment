@@ -9,6 +9,7 @@
 #import "C4QCatFactsTableViewController.h"
 #import "C4QCatFactsTableViewCell.h"
 #import "C4QCatFactsDetailViewController.h"
+#import "C4QSavedCatFactsTableViewController.h"
 #import <AFNetworking/AFNetworking.h>
 
 #define CAT_API_URL @"http://catfacts-api.appspot.com/api/facts?number=100"
@@ -16,6 +17,7 @@
 @interface C4QCatFactsTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *catFacts;
+@property (strong, nonatomic) NSMutableArray *savedCatFacts;
 
 @end
 
@@ -25,15 +27,23 @@
 {
     [super viewDidLoad];
     
-    [self retrieveCatFacts];
+    self.catFacts = [[NSMutableArray alloc] init];
+    self.savedCatFacts = [[NSMutableArray alloc] init];
+    
+    [self retrieveOnlineCatFacts];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 12.0;
 }
 
-- (void)retrieveCatFacts {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    self.catFacts = [[NSMutableArray alloc] init];
+    [self retrieveSavedCatFacts];
+    [self.tableView reloadData];
+}
+
+- (void)retrieveOnlineCatFacts {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/javascript"];
@@ -44,8 +54,6 @@
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
      
              self.catFacts = [responseObject objectForKey:@"facts"];
-              
-             //NSLog(@"%@", self.catFacts);
              
              [self.tableView reloadData];
          }
@@ -58,27 +66,29 @@
      ];
 }
 
+- (void)retrieveSavedCatFacts {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //[defaults removeObjectForKey:@"catFactsKey"];
+    
+    self.savedCatFacts = [NSMutableArray arrayWithArray:[defaults objectForKey:@"catFactsKey"]];
+    NSLog(@"SAVED: %@", self.savedCatFacts);
+}
+
 - (void)save:(UIButton *)sender {
     
     CGPoint point = [self.tableView convertPoint:CGPointZero fromView:sender];
     
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:point];
     
+    [self.savedCatFacts addObject:self.catFacts[indexPath.row]];
+    NSLog(@"UPDATED: %@", self.savedCatFacts);
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSMutableDictionary *savedCatFacts = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"catFactsKey"]];
-    NSLog(@"SAVED: %@", savedCatFacts);
-    
-    if (savedCatFacts == NULL) {
-        
-        savedCatFacts = [[NSMutableDictionary alloc] init];
-    }
-    
-    [savedCatFacts setObject:self.catFacts[indexPath.row] forKey:self.catFacts[indexPath.row]];
-    NSLog(@"UPDATED: %@", savedCatFacts);
-    
     NSString *catFactsKey = @"catFactsKey";
-    [defaults setObject:savedCatFacts forKey:catFactsKey];
+    [defaults setObject:self.savedCatFacts forKey:catFactsKey];
+    
+    [self.tableView reloadData];
     
     [self catAlert];
 }
@@ -96,7 +106,6 @@
     [self presentViewController:alert animated:YES completion:nil];
 
 }
-
 
 #pragma mark - Table view data source
 
@@ -120,7 +129,15 @@
     }
     
     cell.catFactLabel.text = self.catFacts[indexPath.row];
-    [cell.saveFactButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if ([self.savedCatFacts containsObject:cell.catFactLabel.text]) {
+        cell.saveFactButton.hidden = YES;
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.saveFactButton.hidden = NO;
+        [cell.saveFactButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
 
     return cell;
 }
@@ -134,9 +151,16 @@
     
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     
-    C4QCatFactsDetailViewController *detailVC = [segue destinationViewController];
-    
-    detailVC.catFact = self.catFacts[indexPath.row];
+    if ([segue.identifier isEqualToString:@"detailSegueIdentifier"]) {
+        
+        C4QCatFactsDetailViewController *detailVC = [segue destinationViewController];
+        detailVC.catFact = self.catFacts[indexPath.row];
+        
+    } else {
+        
+        C4QSavedCatFactsTableViewController *savedTVC = [segue destinationViewController];
+        savedTVC.savedCatFacts = self.savedCatFacts;
+    }
 }
 
 @end
