@@ -13,6 +13,9 @@
 #import <AFNetworking/AFNetworking.h>
 
 #define CAT_API_URL @"http://catfacts-api.appspot.com/api/facts?number=100"
+#define CAT_FACTS_KEY @"catFactsKey"
+#define DETAIL_SEGUE_IDENTIFIER @"detailSegueIdentifier"
+#define CAT_CELL_IDENTIFIER @"catCell"
 
 @interface C4QCatFactsTableViewController ()
 
@@ -71,7 +74,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     //[defaults removeObjectForKey:@"catFactsKey"];
     
-    self.savedCatFacts = [NSMutableArray arrayWithArray:[defaults objectForKey:@"catFactsKey"]];
+    self.savedCatFacts = [NSMutableArray arrayWithArray:[defaults objectForKey:CAT_FACTS_KEY]];
     NSLog(@"SAVED: %@", self.savedCatFacts);
 }
 
@@ -85,8 +88,7 @@
     NSLog(@"UPDATED: %@", self.savedCatFacts);
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *catFactsKey = @"catFactsKey";
-    [defaults setObject:self.savedCatFacts forKey:catFactsKey];
+    [defaults setObject:self.savedCatFacts forKey:CAT_FACTS_KEY];
     
     [self.tableView reloadData];
     
@@ -121,11 +123,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    C4QCatFactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"catCell"];
+    C4QCatFactsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CAT_CELL_IDENTIFIER];
     
     if (!cell) {
-        [tableView registerNib:[UINib nibWithNibName:@"C4QCatFactsTableViewCell" bundle:nil] forCellReuseIdentifier:@"catCell"];
-        cell = [tableView dequeueReusableCellWithIdentifier:@"catCell"];
+        [tableView registerNib:[UINib nibWithNibName:@"C4QCatFactsTableViewCell" bundle:nil] forCellReuseIdentifier:CAT_CELL_IDENTIFIER];
+        cell = [tableView dequeueReusableCellWithIdentifier:CAT_CELL_IDENTIFIER];
     }
     
     cell.catFactLabel.text = self.catFacts[indexPath.row];
@@ -144,15 +146,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self performSegueWithIdentifier:@"detailSegueIdentifier" sender:self];
+    [self performSegueWithIdentifier:DETAIL_SEGUE_IDENTIFIER sender:self];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    
-    if ([segue.identifier isEqualToString:@"detailSegueIdentifier"]) {
+    if ([segue.identifier isEqualToString:DETAIL_SEGUE_IDENTIFIER]) {
         
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         C4QCatFactsDetailViewController *detailVC = [segue destinationViewController];
         detailVC.catFact = self.catFacts[indexPath.row];
         

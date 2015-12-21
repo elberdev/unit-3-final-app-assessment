@@ -8,6 +8,8 @@
 
 #import "C4QSavedCatFactsTableViewController.h"
 
+#define CAT_FACTS_KEY @"catFactsKey"
+
 @interface C4QSavedCatFactsTableViewController ()
 
 @end
@@ -38,17 +40,18 @@
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
+
     return YES;
 }
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
 
-        NSMutableArray* savedCatFactsCopy = [[[NSUserDefaults standardUserDefaults] arrayForKey:@"catFactsKey"] mutableCopy];
+        NSMutableArray* savedCatFactsCopy = [[[NSUserDefaults standardUserDefaults] arrayForKey:CAT_FACTS_KEY] mutableCopy];
         [savedCatFactsCopy removeObjectAtIndex:indexPath.row];
-        [[NSUserDefaults standardUserDefaults] setObject:savedCatFactsCopy forKey:@"catFactsKey"];
+        [[NSUserDefaults standardUserDefaults] setObject:savedCatFactsCopy forKey:CAT_FACTS_KEY];
         
         self.savedCatFacts = savedCatFactsCopy;
         [self.tableView reloadData];
